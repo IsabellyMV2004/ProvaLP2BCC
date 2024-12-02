@@ -76,7 +76,7 @@ const CadastroUsuario = () => {
       <ul>
         {usuarios.map((user) => (
           <li key={user.id}>
-            <img src={user.urlAvatar} alt={user.nickname} style={{ width: 50 }} />
+            <img src={user.urlAvatar} style={{ width: 50 }} />
             <td>{user.nickname}</td>
             <td>
               <Button onClick={()=>{handleEdit(user)}
