@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../redux/authSlice'; // Nova action para registro
+import { loginUser } from './redux/authSlice'; // Nova action para registro
 import { Button, Form, Alert } from 'react-bootstrap';
 
 export default function FormCadUsuario() {
@@ -20,7 +20,7 @@ export default function FormCadUsuario() {
     }
 
     const newUser = { nickname, senha, urlAvatar };
-    dispatch(registerUser(newUser));
+    dispatch(loginUser(newUser));
   };
 
   return (

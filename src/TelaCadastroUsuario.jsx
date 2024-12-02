@@ -1,9 +1,9 @@
 import { Alert } from "react-bootstrap";
 import FormCadUsuarios from "./Formularios/FormCadUsuario";
-import Pagina from "../layouts/Pagina";
+import Pagina from "./componentes/layouts/Pagina";
 import { useEffect, useState } from "react";
 import TabelaUsuarios from "./Tabelas/TabelaUsuarios";
-import { consultarUsuario } from "../../servicos/servicoUsuario";
+import { consultarUsuario } from "./servicos/servicoUsuario";
 
 export default function TelaCadastroUsuario(props) {
     const [exibirTabela, setExibirTabela] = useState(true);

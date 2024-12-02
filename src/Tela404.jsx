@@ -1,4 +1,4 @@
-import Pagina from "../layouts/Pagina";
+import Pagina from "./componentes/layouts/Pagina";
 import imagem404 from '../../assets/imagens/pagina404.png';
 import { Container } from "react-bootstrap";
 export default function Tela404(props){

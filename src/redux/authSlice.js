@@ -14,7 +14,7 @@ const authSlice = createSlice({
       state.loading = true;
     },
     loginSuccess(state, action) {
-      state.user = action.payload;
+      state.user = action.payload; // Usuário retornado pela API
       state.isAuthenticated = true;
       state.loading = false;
       state.error = null;
@@ -28,35 +28,14 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = null;
     },
-    registerStart(state) {
-      state.loading = true;
-    },
-    registerSuccess(state, action) {
-      state.user = action.payload;
-      state.isAuthenticated = true;
-      state.loading = false;
-      state.error = null;
-    },
-    registerFailure(state, action) {
-      state.loading = false;
-      state.error = action.payload;
-    },
   },
 });
 
-export const {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-  logout,
-  registerStart,
-  registerSuccess,
-  registerFailure,
-} = authSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
 
 export default authSlice.reducer;
 
-// Thunk para login do usuário
+// Thunk para login
 export const loginUser = (nickname, senha) => async (dispatch) => {
   dispatch(loginStart());
   try {
@@ -66,30 +45,11 @@ export const loginUser = (nickname, senha) => async (dispatch) => {
     );
 
     if (response.data.status) {
-      dispatch(loginSuccess({ nickname }));
+      dispatch(loginSuccess(response.data.usuario)); // Atualiza com o usuário retornado
     } else {
-      dispatch(loginFailure('Credenciais inválidas'));
+      dispatch(loginFailure(response.data.mensagem || 'Credenciais inválidas'));
     }
   } catch (error) {
     dispatch(loginFailure('Erro ao se conectar ao servidor.'));
-  }
-};
-
-// Thunk para registro de usuário
-export const registerUser = (newUser) => async (dispatch) => {
-  dispatch(registerStart());
-  try {
-    const response = await axios.post(
-      'https://backend-bcc-2-b.vercel.app/usuario',
-      newUser
-    );
-
-    if (response.data.status) {
-      dispatch(registerSuccess({ nickname: newUser.nickname }));
-    } else {
-      dispatch(registerFailure('Erro ao registrar o usuário.'));
-    }
-  } catch (error) {
-    dispatch(registerFailure('Erro ao se conectar ao servidor.'));
   }
 };

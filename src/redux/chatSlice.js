@@ -2,64 +2,49 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const chatSlice = createSlice({
-  name: 'chat',
-  initialState: {
-    messages: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    fetchMessagesStart(state) {
-      state.loading = true;
+    name: 'chat',
+    initialState: {
+        messages: [], // Inicialize como um array vazio
+        loading: false,
+        error: null,
     },
-    fetchMessagesSuccess(state, action) {
-      state.messages = action.payload;
-      state.loading = false;
+    reducers: {
+        fetchMessagesStart: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        fetchMessagesSuccess: (state, action) => {
+            state.loading = false;
+            state.messages = action.payload;
+        },
+        fetchMessagesFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
     },
-    fetchMessagesFailure(state, action) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    addMessage(state, action) {
-      state.messages.push(action.payload);
-    },
-    updateMessageStatus(state, action) {
-      const message = state.messages.find((msg) => msg.id === action.payload);
-      if (message) {
-        message.lida = true;
-      }
-    },
-  },
 });
 
-export const {
-  fetchMessagesStart,
-  fetchMessagesSuccess,
-  fetchMessagesFailure,
-  addMessage,
-  updateMessageStatus,
-} = chatSlice.actions;
+export const { fetchMessagesStart, fetchMessagesSuccess, fetchMessagesFailure } = chatSlice.actions;
+
+// Thunk para buscar mensagens
+export const fetchMessages = () => async (dispatch) => {
+    dispatch(fetchMessagesStart());
+    try {
+        const response = await axios.get('https://backend-bcc-2-b.vercel.app/mensagem');
+        dispatch(fetchMessagesSuccess(Array.isArray(response.data) ? response.data : []));
+    } catch (error) {
+        dispatch(fetchMessagesFailure('Erro ao carregar mensagens.'));
+    }
+};
+
+// Thunk para deletar mensagem
+export const deleteMessage = (id) => async (dispatch) => {
+    try {
+        await axios.delete(`https://backend-bcc-2-b.vercel.app/mensagem/${id}`);
+        dispatch(fetchMessages()); // Atualize as mensagens após deletar
+    } catch (error) {
+        console.error('Erro ao deletar mensagem:', error);
+    }
+};
 
 export default chatSlice.reducer;
-
-export const fetchMessages = () => async (dispatch) => {
-  dispatch(fetchMessagesStart());
-  try {
-    const response = await axios.get('https://backend-bcc-2-b.vercel.app/mensagem');
-    dispatch(fetchMessagesSuccess(response.data));
-  } catch (error) {
-    dispatch(fetchMessagesFailure('Erro ao carregar mensagens.'));
-  }
-};
-
-export const sendMessage = (nickname, conteudo) => async (dispatch) => {
-  try {
-    const response = await axios.post('https://backend-bcc-2-b.vercel.app/mensagem', {
-      nickname,
-      conteudo,
-    });
-    dispatch(addMessage(response.data));
-  } catch (error) {
-    console.error('Erro ao enviar mensagem:', error);
-  }
-};

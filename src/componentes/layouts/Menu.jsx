@@ -17,7 +17,6 @@ export default function Menu(props) {
                     <Nav className="me-auto">
                         <NavDropdown title="Cadastros" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#" as={Link} to="/usuario">Usuarios</NavDropdown.Item>
-                            <NavDropdown.Item href="#" as={Link} to="/mensagens">Mensagens</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link >Usuario Logado: {usuario.usuario}</Nav.Link>
                     </Nav>
