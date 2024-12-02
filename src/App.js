@@ -1,21 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import LoginForm from './LoginForm';
-import FormCadUsuario from './FormCadUsuario';
-import BatePapo from './BatePapo'; // Importar o componente correto
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/LoginUsuario.js';
+import CHAT from './components/batePapo.js';
+import CadastroUsuario from './components/cadUsuario.js';
+import TelaPrincipal from './TelaPrincipal';  // Importa a Tela Principal
 
-export default function App() {
+const App = () => {
   return (
     <Router>
-      <nav>
-        <Link to="/login">Login</Link> | <Link to="/cadastro">Cadastro</Link> |{' '}
-        <Link to="/dashboard">Bate-Papo</Link> {/* Atualize o texto do link */}
-      </nav>
       <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/cadastro" element={<FormCadUsuario />} />
-        <Route path="/dashboard" element={<BatePapo />} /> {/* Troca para BatePapo */}
+        <Route path="/" element={<TelaPrincipal />} /> {/* Tela Principal */}
+        <Route path="/usuarios" element={<CadastroUsuario />} /> {/* Página de Cadastro */}
+        <Route path="/chat" element={<CHAT />} /> {/* Página de Chat */}
       </Routes>
     </Router>
   );
-}
+};
+
+export default App;
