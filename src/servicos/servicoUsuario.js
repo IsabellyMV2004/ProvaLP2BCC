@@ -1,4 +1,4 @@
-const urlBase = 'https://backend-trabalho.vercel.app/usuarios';
+const urlBase = 'https://backend-bcc-2-b.vercel.app/usuario';
 
 export async function gravarUsuario(usuario){
     const resposta = await fetch(urlBase,{

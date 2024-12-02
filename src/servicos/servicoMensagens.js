@@ -1,4 +1,4 @@
-const urlBase = 'https://backend-trabalho.vercel.app/mensagens';
+const urlBase = 'https://backend-bcc-2-b.vercel.app/mensagem';
 
 export async function gravarMensagens(mensagens){
     const resposta = await fetch(urlBase,{
