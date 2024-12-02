@@ -14,7 +14,6 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/cadastro" element={<FormCadUsuario />} />
-        <Route path="/dashboard" element={<BatePapo />} /> {/* Troca para BatePapo */}
       </Routes>
     </Router>
   );

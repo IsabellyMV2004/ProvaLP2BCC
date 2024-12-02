@@ -18,6 +18,7 @@ export default function LoginForm() {
       navigate('/dashboard'); // Redireciona para o painel após login bem-sucedido
     }
   };
+  const messages = useSelector((state) => state.chat.messages);
 
   const handleNavigateToRegister = () => {
     navigate('/cadastro');
