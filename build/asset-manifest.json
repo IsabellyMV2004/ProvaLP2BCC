@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/PROVALP2BCC/static/js/main.092b75af.js",
+    "main.css": "/PROVALP2BCC/static/css/main.d221dc40.css",
+    "main.js": "/PROVALP2BCC/static/js/main.210a0fca.js",
     "index.html": "/PROVALP2BCC/index.html",
-    "main.092b75af.js.map": "/PROVALP2BCC/static/js/main.092b75af.js.map"
+    "main.d221dc40.css.map": "/PROVALP2BCC/static/css/main.d221dc40.css.map",
+    "main.210a0fca.js.map": "/PROVALP2BCC/static/js/main.210a0fca.js.map"
   },
   "entrypoints": [
-    "static/js/main.092b75af.js"
+    "static/css/main.d221dc40.css",
+    "static/js/main.210a0fca.js"
   ]
 }

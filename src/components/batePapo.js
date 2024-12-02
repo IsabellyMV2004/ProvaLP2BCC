@@ -5,7 +5,7 @@ import { buscarMensagens, enviarMensagem, atualizarStatusMensagem, excluirMensag
 const CHAT = () => {
   const dispatch = useDispatch();
   const mensagens = useSelector((state) => state.messages);
-  const usuarioAtivo = useSelector((state) => state.users.activeUser);
+  const usuarioAtivo = useSelector((state) => state.usuarios.activeUser);
 
   const [novaMensagem, setNovaMensagem] = useState('');
 

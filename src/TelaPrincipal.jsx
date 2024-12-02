@@ -6,11 +6,11 @@ const TelaPrincipal = () => {
   const navigate = useNavigate();
 
   const handleCadastro = () => {
-    navigate('/usuarios');  // Redireciona para a página de cadastro
+    navigate('/usuarios');  
   };
 
   const handleLogin = () => {
-    navigate('/');  // Redireciona para a página de login (tela inicial)
+    navigate('/'); 
   };
 
   return (

@@ -5,7 +5,7 @@ import { buscarUsuarios, adicionarUsuario, atualizarUsuario, excluirUsuario } fr
 
 const CadastroUsuario = () => {
   const dispatch = useDispatch();
-  const usuarios = useSelector((state) => state.users.list);
+  const usuarios = useSelector((state) => state.usuarios.list);
   const [nickname, setNickname] = useState('');
   const [urlAvatar, setUrlAvatar] = useState('');
   const [senha, setSenha] = useState('');
@@ -52,13 +52,13 @@ const CadastroUsuario = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Nickname"
+          placeholder="nome"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
         <input
           type="text"
-          placeholder="URLAvatar"
+          placeholder="avatar"
           value={urlAvatar}
           onChange={(e) => setUrlAvatar(e.target.value)}
         />
@@ -77,7 +77,7 @@ const CadastroUsuario = () => {
         {usuarios.map((user) => (
           <li key={user.id}>
             <img src={user.urlAvatar} alt={user.nickname} style={{ width: 50 }} />
-            <span>{user.nickname}</span>
+            <td>{user.nickname}</td>
             <td>
               <Button onClick={()=>{handleEdit(user)}
               }variant="warning">

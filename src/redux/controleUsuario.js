@@ -5,22 +5,22 @@ const BASE_URL = 'https://backend-bcc-2-b.vercel.app/usuario';
 
 export const buscarUsuarios = createAsyncThunk('usuarios/buscarUsuarios', async () => {
   const response = await axios.get(BASE_URL);
-  return response.data.listaUsuarios;  // Retorna a lista de usuários do backend
+  return response.data.listaUsuarios;  
 });
 
 export const adicionarUsuario = createAsyncThunk('usuarios/adicionarUsuario', async (usuario) => {
   const response = await axios.post(BASE_URL, usuario);
-  return response.data;  // Retorna o usuário adicionado
+  return response.data; 
 });
 
 export const atualizarUsuario = createAsyncThunk('usuarios/atualizarUsuario', async (usuario) => {
   const response = await axios.put(BASE_URL, usuario);
-  return response.data;  // Retorna o usuário atualizado
+  return response.data;
 });
 
 export const excluirUsuario = createAsyncThunk('usuarios/excluirUsuario', async (usuario) => {
   const response = await axios.delete(BASE_URL, { data: usuario });
-  return response.data;  // Retorna o usuário excluído
+  return response.data;
 });
 
 const controleUsuario = createSlice({
@@ -34,19 +34,19 @@ const controleUsuario = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(buscarUsuarios.fulfilled, (state, action) => {
-        state.list = action.payload;  // Atualiza a lista de usuários no estado
+        state.list = action.payload;  
       })
       .addCase(adicionarUsuario.fulfilled, (state, action) => {
-        state.list.push(action.payload);  // Adiciona o usuário ao estado
+        state.list.push(action.payload); 
       })
       .addCase(atualizarUsuario.fulfilled, (state, action) => {
         const index = state.list.findIndex(user => user.id === action.payload.id);
         if (index !== -1) {
-          state.list[index] = action.payload;  // Atualiza o usuário no estado
+          state.list[index] = action.payload; 
         }
       })
       .addCase(excluirUsuario.fulfilled, (state, action) => {
-        state.list = state.list.filter(user => user.id !== action.payload.id);  // Remove o usuário do estado
+        state.list = state.list.filter(user => user.id !== action.payload.id);
       });
   },
 });
