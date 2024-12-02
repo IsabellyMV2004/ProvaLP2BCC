@@ -28,12 +28,35 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = null;
     },
+    registerStart(state) {
+      state.loading = true;
+    },
+    registerSuccess(state, action) {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+      state.loading = false;
+      state.error = null;
+    },
+    registerFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} = authSlice.actions;
+
 export default authSlice.reducer;
 
+// Thunk para login do usuário
 export const loginUser = (nickname, senha) => async (dispatch) => {
   dispatch(loginStart());
   try {
@@ -49,5 +72,24 @@ export const loginUser = (nickname, senha) => async (dispatch) => {
     }
   } catch (error) {
     dispatch(loginFailure('Erro ao se conectar ao servidor.'));
+  }
+};
+
+// Thunk para registro de usuário
+export const registerUser = (newUser) => async (dispatch) => {
+  dispatch(registerStart());
+  try {
+    const response = await axios.post(
+      'https://backend-bcc-2-b.vercel.app/usuario',
+      newUser
+    );
+
+    if (response.data.status) {
+      dispatch(registerSuccess({ nickname: newUser.nickname }));
+    } else {
+      dispatch(registerFailure('Erro ao registrar o usuário.'));
+    }
+  } catch (error) {
+    dispatch(registerFailure('Erro ao se conectar ao servidor.'));
   }
 };

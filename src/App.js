@@ -1,17 +1,18 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import BatePapo from './components/BatePapo';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import FormCadUsuario from './componentes/Telas/Formularios/FormCadUsuario';
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/login" component={LoginForm} />
-        <Route path="/bate-papo" component={BatePapo} />
-        <Route path="/" exact component={LoginForm} />
-      </Switch>
+      <nav>
+        <Link to="/login">Login</Link> | <Link to="/register">Cadastro</Link>
+      </nav>
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<FormCadUsuario />} />
+      </Routes>
     </Router>
   );
 }
-
-export default App;
