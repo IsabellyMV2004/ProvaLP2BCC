@@ -11,7 +11,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/telaPrincipal" element={<TelaPrincipal />} /> 
+        <Route path="/PROVAPL2BCC" element={<TelaPrincipal />} /> 
         <Route path="/usuarios" element={<CadastroUsuario />} />
         <Route path="/chat" element={<CHAT />} /> 
         <Route path="/" element={<Login />} /> 
